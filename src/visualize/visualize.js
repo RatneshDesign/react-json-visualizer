@@ -1,6 +1,7 @@
 import { runtime } from "../runtime.js";
 import { createNode } from "../dom/node.js";
 import { connect } from "../dom/connection.js";
+import { updateSidebarData } from "../dom/canvas.js";
 
 export function applyTransform() {
   const { x, y, scale } = runtime.state;
@@ -25,8 +26,8 @@ export function visualize(data) {
   runtime.svg.innerHTML = "";
   runtime.connectionList.length = 0;
 
-  const X_OFFSET = 500; 
-  const Y_GAP = 60; 
+  const X_OFFSET = 500;
+  const Y_GAP = 60;
 
   function walk(obj, label, x) {
     const primitives = Object.entries(obj).filter(([_, v]) => typeof v !== 'object' || v === null);
@@ -47,7 +48,7 @@ export function visualize(data) {
 
     // The total height of this specific branch
     const branchHeight = Math.max(estimatedNodeHeight, totalHeightOfChildren);
-
+    updateSidebarData(data);
     return {
       label,
       branchHeight,

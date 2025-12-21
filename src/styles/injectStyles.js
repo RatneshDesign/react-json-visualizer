@@ -21,12 +21,84 @@ export function injectStyles() {
     --line-color: #94a3b8;
   }
 
-  /* ... keep your variables ... */
+/* Sidebar - Left Side */
+  .canvas-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: #ffffff;
+    border-right: 1px solid var(--node-border);
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+  }
+
+  /* When closed, slide it out of view */
+  .canvas-sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-header {
+    padding: 15px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--node-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .sidebar-content {
+    flex: 1;
+    overflow: auto;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #334155;
+    background: #ffffff;
+  }
+
+  /* Floating Action Buttons */
+  .fab-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1200;
+  }
+
+  .fab-container button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .fab-container button:hover {
+    transform: scale(1.1);
+    background: #f1f5f9;
+  }
+
+  /* Make sure nodes stay above workspace but below UI */
+  .node { z-index: 10; }
+  #connections { z-index: 1; }
 
 
-
-
-  
 
   .canvas-wrap {
     position: fixed; inset: 0;
