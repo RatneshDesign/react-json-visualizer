@@ -8,6 +8,7 @@ export function injectStyles() {
   style.setAttribute("data-json-auto-flow", "true");
 
   style.textContent = `
+  @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
   /* === JSON Auto Flow Styles === */
   :root {
     --canvas-bg: #f3f4f6;
@@ -16,8 +17,8 @@ export function injectStyles() {
     --node-bg: #ffffff;
     --node-header-bg: #f8fafc;
     --node-border: #d1d5db;
-    --accent: #2563eb;
-    --accent-hover: #1d4ed8;
+    --accent: #7538f8ff;          
+    --accent-hover: #8741ffff;
     --key-color: #7c3aed;
     --string-color: #059669;
     --number-color: #d97706;
@@ -32,37 +33,45 @@ export function injectStyles() {
     --collapse-btn-hover: #cbd5e1;
   }
 
-  [data-theme="dark"] {
-    --canvas-bg: #0f172a;
-    --canvas-dot: #334155;
-    --bg: #0f172a;
-    --node-bg: #1e293b;
-    --node-header-bg: #0f172a;
-    --node-border: #334155;
-    --accent: #3b82f6;
-    --accent-hover: #2563eb;
-    --key-color: #a78bfa;
-    --string-color: #34d399;
-    --number-color: #fbbf24;
-    --muted: #94a3b8;
-    --line-color: #64748b;
-    --sidebar-bg: #1e293b;
-    --sidebar-header: #0f172a;
-    --text-primary: #f1f5f9;
-    --text-secondary: #cbd5e1;
-    --hover-bg: #334155;
-    --collapse-btn-bg: #334155;
-    --collapse-btn-hover: #475569;
+ [data-theme="dark"] {
+    --canvas-bg: #0b0e14;          /* Deepest background */
+    --canvas-dot: #1e293b;        /* Subtle grid dots */
+    --bg: #1e293b;
+    --node-bg: #161b22;           /* Dark node card */
+    --node-header-bg: #0d1117;    /* Slightly darker header */
+    --node-border: #30363d;       /* Crisp border */
+    --accent: #6230cdff;            /* Sky blue accent */
+    --accent-hover: #8741ffff;
+    --key-color: #c084fc;         /* Soft purple key */
+    --string-color: #4ade80;      /* Emerald string */
+    --number-color: #fb923c;      /* Orange number */
+    --muted: #8b949e;
+    --line-color: #484f58;        /* Muted connector lines */
+    --sidebar-bg: #0d1117;
+    --sidebar-header: #161b22;
+    --text-primary: #e6edf3;
+    --text-secondary: #7d8590;
+    --hover-bg: #21262d;
+    --collapse-btn-bg: #21262d;
+    --collapse-btn-hover: #30363d;
+  }
+
+  * {
+    transition: background-color var(--transition-speed) ease, 
+                border-color var(--transition-speed) ease, 
+                color var(--transition-speed) ease,
+                stroke var(--transition-speed) ease;
   }
 
   /* Toggle Button - Modern Design */
   .canvas-toggle-btn {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
     z-index: 10001;
-    padding: 10px 18px;
     background: var(--accent);
+    height: 40px;
+    width: 40px;
     color: white;
     border: none;
     border-radius: 10px;
@@ -73,14 +82,18 @@ export function injectStyles() {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
-    gap: 6px;
   }
+    .canvas-toggle-btn img{
+    width:100%;
+    height:100%;
+    object-fit: contain;
+    }
 
-  .canvas-toggle-btn:hover {
-    background: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
-  }
+  // .canvas-toggle-btn:hover {
+  //   background: var(--accent-hover);
+  //   transform: translateY(-2px);
+  //   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+  // }
 
   .canvas-toggle-btn:active {
     transform: translateY(0);
@@ -91,16 +104,16 @@ export function injectStyles() {
     box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
   }
 
-  .canvas-toggle-btn.active:hover {
-    background: #b91c1c;
-    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
-  }
+  // .canvas-toggle-btn.active:hover {
+  //   background: #b91c1c;
+  //   box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+  // }
 
   /* Sidebar Toggle Button - Fixed on Left */
   .sidebar-toggle-btn {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 10px;
     z-index: 10001;
     padding: 10px;
     background: var(--accent);
@@ -117,7 +130,7 @@ export function injectStyles() {
 
   .sidebar-toggle-btn:hover {
     background: var(--accent-hover);
-    transform: translateY(-2px);
+    // transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
   }
 
@@ -127,6 +140,7 @@ export function injectStyles() {
 
   /* Sidebar - Premium Modern Design */
   .canvas-sidebar {
+    font-family: "Lexend", sans-serif;
     position: fixed;
     left: 0;
     top: 0;
@@ -138,11 +152,17 @@ export function injectStyles() {
     z-index: 10000;
     display: flex;
     flex-direction: column;
-    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(0);
   }
 
-  .canvas-sidebar.collapsed {
-    transform: translateX(-320px);
+  .sidebar-toggle-btn {
+    transition: transform 0.4s cubic-bezier(0.05, 0.7, 0.1, 1), background 0.3s;
+  }
+
+.canvas-sidebar.collapsed {
+    transform: translateX(-100%);
   }
 
   .sidebar-header {
@@ -150,7 +170,7 @@ export function injectStyles() {
     background: var(--sidebar-header);
     border-bottom: 1px solid var(--node-border);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     backdrop-filter: blur(8px);
   }
@@ -159,6 +179,7 @@ export function injectStyles() {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-left:10px;
     color: var(--text-primary);
   }
 
@@ -195,14 +216,15 @@ export function injectStyles() {
   .sidebar-content {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     padding: 16px;
     font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
     font-size: 13px;
   }
 
   .sidebar-content::-webkit-scrollbar {
-    width: 8px;
+    width: 7px;
+    height: 7px;
   }
 
   .sidebar-content::-webkit-scrollbar-track {
@@ -418,12 +440,12 @@ export function injectStyles() {
 
   .sidebar-link {
     padding: 10px 12px;
-    background: white;
+    // background: var();
     border: 1px solid var(--node-border);
     border-radius: 8px;
     text-align: center;
     text-decoration: none;
-    color: var(--accent);
+    color: var(--text-primary);
     font-size: 13px;
     font-weight: 600;
     transition: all 0.2s;
@@ -446,6 +468,7 @@ export function injectStyles() {
 
   /* Canvas Wrapper */
   .canvas-wrap {
+    font-family: "Lexend", sans-serif;
     position: fixed;
     inset: 0;
     overflow: hidden;
@@ -533,6 +556,10 @@ export function injectStyles() {
     overflow-x: hidden;
     transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease;
   }
+      .node-body::-webkit-scrollbar {
+    display:none;
+  }
+
 
   .node-body.collapsed {
     max-height: 0;
