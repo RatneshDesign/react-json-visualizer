@@ -73,19 +73,28 @@ function setupInteractions() {
     runtime.container.setPointerCapture(e.pointerId);
   };
 
-runtime.container.onpointermove = (e) => {
-  if (!isDragging) return;
-  
-  // Calculate movement
-  const dx = e.clientX - lastPos.x;
-  const dy = e.clientY - lastPos.y;
-  
-  runtime.state.x += dx;
-  runtime.state.y += dy;
-  
-  lastPos = { x: e.clientX, y: e.clientY };
-  applyTransform();
-};
+  runtime.container.onpointermove = (e) => {
+    if (!isDragging) return;
+
+    const dx = e.clientX - lastPos.x;
+    const dy = e.clientY - lastPos.y;
+
+    // 1. Calculate the new potential position
+    let newX = runtime.state.x + dx;
+    let newY = runtime.state.y + dy;
+
+    // 2. Define the "Safe Zone" (e.g., 1000px padding around the 5000,5000 center)
+    // This prevents the user from dragging into "Deep Space"
+    const padding = 1500;
+    const minX = -7000, maxX = 2000; // Adjust based on your startX/startY
+    const minY = -7000, maxY = 2000;
+
+    runtime.state.x = Math.max(minX, Math.min(maxX, newX));
+    runtime.state.y = Math.max(minY, Math.min(maxY, newY));
+
+    lastPos = { x: e.clientX, y: e.clientY };
+    applyTransform();
+  };
   runtime.container.onpointerup = () => isDragging = false;
 
 

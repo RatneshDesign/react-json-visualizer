@@ -21,27 +21,38 @@ export function injectStyles() {
     --line-color: #94a3b8;
   }
 
+  /* ... keep your variables ... */
+
+
+
+
+  
+
   .canvas-wrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    position: fixed; inset: 0;
     overflow: hidden;
     cursor: grab;
-   user-select: none;
+    background-color: #f3f4f6; /* The gray base */
+    /* The grid is now on the FIXED container */
+    background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+    user-select: none;
+  }
+
+  .workspace {
+    position: absolute;
+    /* Remove fixed width/height and background */
+    width: 6000px; height: 6000px; 
+    background: transparent; 
+    border: none;
+    transform-origin: 0 0;
   }
 
   .canvas-wrap:active {
     cursor: grabbing;
   }
 
-  .workspace {
-    position: absolute;
-    width: 9000px;
-    height: 6000px;
-    background: #ffffff;
-    border: 1px solid #d1d5db;
-    transform-origin: 0 0;
-  }
+
 
   .workspace::before {
     content: "";
@@ -52,17 +63,20 @@ export function injectStyles() {
     pointer-events: none;
   }
 
-  .node {
-    position: absolute;
-    min-width: 220px;
-    background: var(--node-bg);
-    border: 1px solid var(--node-border);
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    font-size: 13px;
-    z-index: 10;
-      user-select: none;
-  }
+.node {
+  position: absolute;
+  width: fit-content;
+  max-width: 550px;
+  min-width: 220px;
+  background: var(--node-bg);
+  border: 1px solid var(--node-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  font-size: 13px;
+  z-index: 10;
+  user-select: none;
+}
+
 
   .node .header {
     padding: 10px 14px;
@@ -91,27 +105,47 @@ export function injectStyles() {
     padding: 2px 8px;
     font-size: 10px;
   }
+.node-body {
+  max-height: 1000px;
+  opacity: 1;
+  padding: 12px;
+  overflow-y: auto; 
+  overflow-x: hidden;
+  transition:
+    max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease,
+    padding 0.35s ease;
+}
 
-  .node-body {
-    padding: 12px;
-  }
+/* Ensure the collapsed state truly hides everything */
+.node-body.collapsed {
+  max-height: 0; /* Use max-height instead of height for the transition */
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
 
-  .node-body.collapsed {
-    display: none;
-  }
+.data-row {
+  display: flex;
+  font-family: ui-monospace, monospace;
+  margin-bottom: 8px;
 
-  .data-row {
-    display: flex;
-    font-family: ui-monospace, monospace;
-    margin-bottom: 4px;
-    white-space: nowrap;
-  }
+}
 
-  .data-key {
-    color: var(--key-color);
-    font-weight: 600;
-    margin-right: 8px;
-  }
+.data-key {
+  font-weight: bold;
+  color: var(--key-color);
+  margin-bottom: 2px;
+}
+
+.data-value {
+  padding-left: 4px;
+  color: var(--string-color);
+  word-break: break-all;
+
+}
+ 
 
   .data-key::after {
     content: ":";
@@ -126,58 +160,24 @@ export function injectStyles() {
     font-weight: 600;
   }
 
-  svg#connections {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+#connections { 
+    position: absolute; 
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; 
+    overflow: visible; 
+    z-index: 1; 
   }
 
-  path.connector {
-    fill: none;
-    stroke: var(--line-color);
-    stroke-width: 2px;
+  .connector { 
+    fill: none; 
+    stroke: #94a3b8; 
+    stroke-width: 2px; 
+    vector-effect: non-scaling-stroke;
   }
-        #connections { 
-      position: absolute; inset: 0; 
-      pointer-events: none; overflow: visible; 
-      z-index: 1; 
-    }
-    .connector { 
-      fill: none; stroke: #94a3b8; stroke-width: 2.5px; 
-      vector-effect: non-scaling-stroke; /* Keeps lines crisp when zooming */
-    }
+
+
   `;
 
   document.head.appendChild(style);
 }
-
-// // styles/injectStyles.js
-// export function injectStyles() {
-//   const style = document.createElement('style');
-//   style.textContent = `
-//     .canvas-wrap {
-//       position: fixed; inset: 0; overflow: hidden;
-//       background: #e5e7eb; cursor: grab;
-//     }
-//     .workspace {
-//       position: absolute;
-//       width: 20000px; height: 20000px; /* Huge virtual space */
-//       transform-origin: 0 0;
-//     }
-//     #connections {
-//       position: absolute; inset: 0;
-//       pointer-events: none; overflow: visible;
-//       z-index: 1;
-//     }
-//     .connector {
-//       fill: none; stroke: #94a3b8; stroke-width: 2.5px;
-//       vector-effect: non-scaling-stroke; /* Keeps lines crisp when zooming */
-//     }
-//     .node {
-//       position: absolute; z-index: 10; width: 250px;
-//       background: white; border: 1px solid #d1d5db;
-//       border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-//     }
-//   `;
-//   document.head.appendChild(style);
-// }
