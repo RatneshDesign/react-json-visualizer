@@ -44,7 +44,7 @@ export function visualize(data) {
     if (totalHeightOfChildren > 0) totalHeightOfChildren -= Y_GAP;
 
     const branchHeight = Math.max(estimatedNodeHeight, totalHeightOfChildren);
-
+    updateSidebarData(data);
     return {
       label,
       branchHeight,
