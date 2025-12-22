@@ -3,6 +3,11 @@
   "version": "1.0.1",
   "description": "Visual JSON data flow inspector for developers",
   "main": "src/index.js",
+  "homepage": "https://github.com/ratneshdesign/json-visualizer#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ratneshdesign/json-visualizer.git"
+  },
   "keywords": [
     "json",
     "data-visualization",
@@ -13,7 +18,10 @@
     "vanilla-js",
     "json viewer"
   ],
-  "author": "Ratnesh Kumawat",
-  "license": "ISC",
+  "author": {
+    "name": "Ratnesh Kumawat",
+    "url": "https://ratneshkumawat.vercel.app"
+  },
+  "license": "MIT",
   "private": false
 }

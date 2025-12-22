@@ -33,12 +33,12 @@ No external dependencies
 
 ## Installation
 ```sh
-npm install json-auto-flow
+npm install react-json-visualizer
 ```
 or
 
 ```sh
-pnpm add json-auto-flow
+pnpm add react-json-visualizer
 ```
 
 ---
@@ -46,7 +46,7 @@ pnpm add json-auto-flow
 ## Usage
 You only need one function.
 ```js
-import { renderJSON } from "json-auto-flow";
+import { renderJSON } from "react-json-visualizer";
 
 renderJSON(data);
 ```
