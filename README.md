@@ -56,6 +56,10 @@ renderJSON(data);
 That’s it.
 No setup, no config, no framework lock.
 
+### Interactive UI:
+After running this code, a button/icon will appear at the top-right corner of the page.
+Click it to launch the JSON Visualizer, and you can start exploring your data interactively.
+
 
 ## JavaScript Example
 ```js
