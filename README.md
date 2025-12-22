@@ -8,12 +8,14 @@ You import one function, pass your data, and instantly see the JSON data flow.
 ---
 
 ## What is React JSON Visualizer?
+-Works with React, Next.js, Vanilla JS, and any browser environment
+
 React JSON Visualizer turns any JavaScript object or array into a visual data graph.
-Each object becomes a node
-Nested objects and arrays are connected visually
-Primitive values stay inside nodes
-Users can drag, collapse, and explore data relationships
-This makes it ideal as a developer tool, debugging utility, or internal JSON inspector.
+-Each object becomes a node
+-Nested objects and arrays are connected visually
+-Primitive values stay inside nodes
+-Users can drag, collapse, and explore data relationships
+-This makes it ideal as a developer tool, debugging utility, or internal JSON inspector.
 
 ---
 
