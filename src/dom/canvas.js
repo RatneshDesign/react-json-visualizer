@@ -1,13 +1,14 @@
 // dom/canvas.js
 import { runtime } from "../runtime.js";
 import { applyTransform } from "../visualize/visualize.js";
+import logoUrl from '../logo.png';
 
 export function initCanvas() {
   if (runtime.container) return;
 
   const scriptUrl = import.meta.url;
   // Create a URL pointing to the logo in the same directory (or adjust path)
-  const logoUrl = new URL('../logo.png', scriptUrl).href;
+  // const logoUrl = new URL('../logo.png', scriptUrl).href;
   // 1. Create Toggle Button
   const toggleBtn = document.createElement("button");
   // Inside your button creation logic
