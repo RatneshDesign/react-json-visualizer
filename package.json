@@ -1,7 +1,19 @@
 {
-  "name": "json-visualizer",
-  "version": "0.0.1",
-  "type": "module",
+  "name": "react-json-visualizer",
+  "version": "1.0.0",
+  "description": "Visual JSON data flow inspector for developers",
   "main": "src/index.js",
-  "files": ["src"]
+  "keywords": [
+    "json",
+    "data-visualization",
+    "devtools",
+    "json visualizer",
+    "react",
+    "nextjs",
+    "vanilla-js",
+    "json viewer"
+  ],
+  "author": "Ratnesh Kumawat",
+  "license": "ISC",
+  "private": false
 }

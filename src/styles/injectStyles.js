@@ -70,8 +70,8 @@ export function injectStyles() {
     right: 10px;
     z-index: 10001;
     background: var(--accent);
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     color: white;
     border: none;
     border-radius: 10px;
@@ -86,6 +86,7 @@ export function injectStyles() {
     .canvas-toggle-btn img{
     width:100%;
     height:100%;
+    scale: 1.3;
     object-fit: contain;
     }
 
