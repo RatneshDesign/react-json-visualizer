@@ -1,6 +1,6 @@
 {
   "name": "react-json-visualizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Visual JSON data flow inspector for developers",
   "main": "src/index.js",
   "keywords": [
