@@ -1,34 +1,25 @@
-// dom/canvas.js
 import { runtime } from "../runtime.js";
 import { applyTransform } from "../visualize/visualize.js";
-import logoUrl from '../logo.png';
+// import logoUrl from '../logo.png';
+const logoUrl = new URL("../logo.png", import.meta.url).href;
+
 
 export function initCanvas() {
   if (runtime.container) return;
 
-  const scriptUrl = import.meta.url;
-  // Create a URL pointing to the logo in the same directory (or adjust path)
-  // const logoUrl = new URL('../logo.png', scriptUrl).href;
-  // 1. Create Toggle Button
+  // canvas Toggle Button
   const toggleBtn = document.createElement("button");
-  // Inside your button creation logic
+
   toggleBtn.className = "canvas-toggle-btn";
   toggleBtn.innerHTML = `<img src="${logoUrl}" alt="Logo" style="object-fit: contain;">`;
 
-  // toggleBtn.className = "canvas-toggle-btn";
-  // toggleBtn.innerHTML = `
-  //   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 6px;">
-  //     <path d="M2 3h12M2 8h12M2 13h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  //   </svg>
-  //   <span>Show Canvas</span>
-  // `;
   toggleBtn.onclick = () => toggleCanvas(toggleBtn, sidebarToggleBtn);
   document.body.appendChild(toggleBtn);
 
-  // 2. Create Sidebar Toggle Button (Fixed)
+  // Sidebar Toggle Button
   const sidebarToggleBtn = document.createElement("button");
   sidebarToggleBtn.className = "sidebar-toggle-btn";
-  sidebarToggleBtn.style.display = "none"; // Hidden initially
+  sidebarToggleBtn.style.display = "none";
   sidebarToggleBtn.innerHTML = `
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
@@ -39,7 +30,7 @@ export function initCanvas() {
   sidebarToggleBtn.onclick = () => toggleSidebarVisibility(sidebarToggleBtn);
   document.body.appendChild(sidebarToggleBtn);
 
-  // 3. Create Sidebar
+  // Create Sidebar
   const sidebar = document.createElement("div");
   sidebar.className = "canvas-sidebar";
   sidebar.style.display = "none";
@@ -53,7 +44,7 @@ export function initCanvas() {
     </div>
   `;
 
-  // Sidebar Content (scrollable area)
+  // Sidebar Content
   const sidebarContent = document.createElement("div");
   sidebarContent.className = "sidebar-content";
   sidebarContent.innerHTML = `
@@ -119,7 +110,7 @@ export function initCanvas() {
   runtime.sidebar = sidebar;
   runtime.sidebarToggleBtn = sidebarToggleBtn;
 
-  // 4. Create Canvas Elements
+  // Createed Canvas Elements
   runtime.container = document.createElement("div");
   runtime.container.className = "canvas-wrap";
   runtime.container.style.display = "none";
@@ -136,16 +127,15 @@ export function initCanvas() {
   runtime.container.appendChild(runtime.workspace);
   document.body.appendChild(runtime.container);
 
-  // 5. Attach Interaction Logic
+  // Attached Interactions
   setupInteractions();
 }
 
 function toggleCanvas(btn, sidebarBtn) {
-  // We keep your display check exactly as it was
   const isVisible = runtime.container.style.display !== "none";
 
   if (isVisible) {
-    // === CLOSE ANIMATION (Functionality preserved) ===
+    // CLOSE ANIMATION
     runtime.container.style.opacity = "0";
     runtime.sidebar.style.opacity = "0";
 
@@ -159,10 +149,10 @@ function toggleCanvas(btn, sidebarBtn) {
       runtime.sidebar.style.opacity = "1";
     }, 300);
 
-    // Swap text logic for Class logic (Better for images)
+    // Swap text logic for Class logic
     btn.classList.remove("active");
   } else {
-    // === OPEN ANIMATION (Functionality preserved) ===
+    //OPEN ANIMATION
     runtime.container.style.display = "block";
     runtime.sidebar.style.display = "flex";
     sidebarBtn.style.display = "flex";
@@ -177,22 +167,6 @@ function toggleCanvas(btn, sidebarBtn) {
 }
 
 function toggleSidebarVisibility(sidebarBtn) {
-  // const isVisible = runtime.sidebar.style.display !== "none";
-
-  // if (isVisible) {
-  //   // Close sidebar
-  //   runtime.sidebar.style.opacity = "0";
-  //   setTimeout(() => {
-  //     runtime.sidebar.style.display = "none";
-  //   }, 300);
-  // } else {
-  //   // Open sidebar
-  //   runtime.sidebar.style.display = "flex";
-  //   runtime.sidebar.style.opacity = "0";
-  //   setTimeout(() => {
-  //     runtime.sidebar.style.opacity = "1";
-  //   }, 10);
-  // }
   runtime.sidebar.classList.toggle("collapsed");
 }
 
@@ -214,7 +188,7 @@ function toggleTheme(btn) {
     moonIcon.style.display = 'none';
   }
 
-  // Update connection lines color
+  // Updating connection lines color
   updateConnectionColors(newTheme);
 }
 
@@ -226,7 +200,7 @@ function updateConnectionColors(theme) {
   });
 }
 
-// Update sidebar with JSON data from visualize
+// Updating sidebar with JSON data
 export function updateSidebarWithData(data) {
   if (!runtime.sidebarContent) return;
 
@@ -317,7 +291,7 @@ function setupInteractions() {
     }
   }, { passive: false });
 
-  // Add event delegation for collapsible JSON items
+  // event delegation for collapsible JSON items
   document.addEventListener('click', (e) => {
     const keyComplex = e.target.closest('.json-key-complex');
     if (keyComplex) {

@@ -134,7 +134,22 @@ Any browser environment
 
 ---
 
-## Keywords
+License :
+
+MIT License
+© Ratnesh Kumawat
+
+## Author
+Ratnesh Kumawat Portfolio: https://ratneshkumawat.vercel.app
+
+---
+
+React JSON Visualizer is built to be simple, visual, and developer-friendly.
+If you work with JSON every day, this tool helps you see your data, not just read it.
+
+---
+
+### Keywords
 
 json visualizer
 json visualizer
@@ -147,18 +162,3 @@ ui ux
 dx friendly
 data visualization
 javascript json
-
----
-
-License :
-
-MIT License
-© Ratnesh Kumawat
-
-## Author
-Ratnesh Kumawat Portfolio: https://ratneshkumwat.vercel.app
-
----
-
-React JSON Visualizer is built to be simple, visual, and developer-friendly.
-If you work with JSON every day, this tool helps you see your data, not just read it.

@@ -9,7 +9,6 @@ export function injectStyles() {
 
   style.textContent = `
   @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-  /* === JSON Auto Flow Styles === */
   :root {
     --canvas-bg: #f3f4f6;
     --canvas-dot: #cbd5e1;
@@ -34,19 +33,19 @@ export function injectStyles() {
   }
 
  [data-theme="dark"] {
-    --canvas-bg: #0b0e14;          /* Deepest background */
-    --canvas-dot: #1e293b;        /* Subtle grid dots */
+    --canvas-bg: #0b0e14;          
+    --canvas-dot: #1e293b;        
     --bg: #1e293b;
-    --node-bg: #161b22;           /* Dark node card */
-    --node-header-bg: #0d1117;    /* Slightly darker header */
-    --node-border: #30363d;       /* Crisp border */
-    --accent: #6230cdff;            /* Sky blue accent */
+    --node-bg: #161b22;           
+    --node-header-bg: #0d1117;   
+    --node-border: #30363d;       
+    --accent: #6230cdff;       
     --accent-hover: #8741ffff;
-    --key-color: #c084fc;         /* Soft purple key */
-    --string-color: #4ade80;      /* Emerald string */
-    --number-color: #fb923c;      /* Orange number */
+    --key-color: #c084fc;       
+    --string-color: #4ade80;      
+    --number-color: #fb923c;      
     --muted: #8b949e;
-    --line-color: #484f58;        /* Muted connector lines */
+    --line-color: #484f58;
     --sidebar-bg: #0d1117;
     --sidebar-header: #161b22;
     --text-primary: #e6edf3;
@@ -63,7 +62,6 @@ export function injectStyles() {
                 stroke var(--transition-speed) ease;
   }
 
-  /* Toggle Button - Modern Design */
   .canvas-toggle-btn {
     position: fixed;
     top: 10px;
@@ -90,12 +88,6 @@ export function injectStyles() {
     object-fit: contain;
     }
 
-  // .canvas-toggle-btn:hover {
-  //   background: var(--accent-hover);
-  //   transform: translateY(-2px);
-  //   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
-  // }
-
   .canvas-toggle-btn:active {
     transform: translateY(0);
   }
@@ -105,12 +97,6 @@ export function injectStyles() {
     box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
   }
 
-  // .canvas-toggle-btn.active:hover {
-  //   background: #b91c1c;
-  //   box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
-  // }
-
-  /* Sidebar Toggle Button - Fixed on Left */
   .sidebar-toggle-btn {
     position: fixed;
     top: 10px;
@@ -131,7 +117,6 @@ export function injectStyles() {
 
   .sidebar-toggle-btn:hover {
     background: var(--accent-hover);
-    // transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
   }
 
@@ -139,7 +124,6 @@ export function injectStyles() {
     transform: translateY(0);
   }
 
-  /* Sidebar - Premium Modern Design */
   .canvas-sidebar {
     font-family: "Lexend", sans-serif;
     position: fixed;
@@ -154,7 +138,7 @@ export function injectStyles() {
     display: flex;
     flex-direction: column;
     will-change: transform;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateX(0);
   }
 
@@ -263,7 +247,6 @@ export function injectStyles() {
     color: var(--muted);
   }
 
-  /* JSON Tree Styles */
   .json-tree {
     line-height: 1.6;
   }
@@ -356,7 +339,6 @@ export function injectStyles() {
     letter-spacing: 0.03em;
   }
 
-  /* Sidebar Footer */
   .sidebar-footer {
     padding: 20px 24px;
     border-top: 1px solid var(--node-border);
@@ -441,7 +423,6 @@ export function injectStyles() {
 
   .sidebar-link {
     padding: 10px 12px;
-    // background: var();
     border: 1px solid var(--node-border);
     border-radius: 8px;
     text-align: center;
@@ -467,7 +448,6 @@ export function injectStyles() {
     transform: translateY(0);
   }
 
-  /* Canvas Wrapper */
   .canvas-wrap {
     font-family: "Lexend", sans-serif;
     position: fixed;
@@ -493,9 +473,9 @@ export function injectStyles() {
     border: none;
     transform-origin: 0 0;
     transition: transform 0.1s ease-out;
+    z-index: 10000;
   }
 
-  /* Node Styles */
   .node {
     position: absolute;
     width: fit-content;
@@ -506,14 +486,13 @@ export function injectStyles() {
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
     font-size: 13px;
-    z-index: 10;
     user-select: none;
+    z-index: 10009;
     transition: box-shadow 0.2s, transform 0.2s;
   }
 
   .node:hover {
     box-shadow: 0 8px 16px -2px rgb(0 0 0 / 0.15), 0 4px 8px -2px rgb(0 0 0 / 0.08);
-    transform: translateY(-1px);
   }
 
   .node .header {
@@ -555,7 +534,8 @@ export function injectStyles() {
     padding: 12px;
     overflow-y: auto;
     overflow-x: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease;
+    transition: all 0.5s cubic-bezier(1, 0, 0.2, 1);
+
   }
       .node-body::-webkit-scrollbar {
     display:none;
@@ -601,7 +581,6 @@ export function injectStyles() {
     font-weight: 600;
   }
 
-  /* SVG Connections */
   #connections {
     position: absolute;
     top: 0;

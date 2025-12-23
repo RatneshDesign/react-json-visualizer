@@ -4,7 +4,6 @@ export function connect(a, b) {
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   path.setAttribute("class", "connector");
 
-  // Add these ports so you can actually see where lines start/end
   const sC = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   const eC = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   [sC, eC].forEach(c => {
@@ -15,7 +14,7 @@ export function connect(a, b) {
   runtime.svg.appendChild(path);
 
   const update = () => {
-    // If offsetWidth is 0, the CSS hasn't loaded yet!
+    // If offsetWidth is 0, the CSS hasn't loaded yet
     const x1 = a.offsetLeft + (a.offsetWidth || 250);
     const y1 = a.offsetTop + 20;
     const x2 = b.offsetLeft;
@@ -28,6 +27,6 @@ export function connect(a, b) {
   };
 
   runtime.connectionList.push(update);
-  // Use requestAnimationFrame to ensure the DOM has rendered the node size
+
   requestAnimationFrame(update);
 }

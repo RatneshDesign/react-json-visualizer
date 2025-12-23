@@ -1,4 +1,3 @@
-// visualize/visualize.js
 import { runtime } from "../runtime.js";
 import { createNode } from "../dom/node.js";
 import { connect } from "../dom/connection.js";

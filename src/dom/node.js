@@ -16,7 +16,7 @@ export function createNode(title, x, y, data) {
 
   const body = node.querySelector(".node-body");
 
-  // Inside createNode function...
+  // Inside createNode function
   Object.entries(data).forEach(([k, v]) => {
     const row = document.createElement("div");
     row.className = "data-row";
@@ -29,7 +29,7 @@ export function createNode(title, x, y, data) {
       type = "ref";
     }
 
-    // Wrapped in template literal
+    // json data key and values , and its type
     row.innerHTML = `
     <span class="data-key">${k}</span>
     <span class="data-value ${type}">${val}</span>
@@ -47,11 +47,11 @@ export function createNode(title, x, y, data) {
     const isCollapsed = body.classList.toggle("collapsed");
     btn.textContent = isCollapsed ? "+" : "−";
 
-    // Run connection updates during the 300ms CSS transition
+    // Runs connection updates during the 300ms CSS transition
     const startTime = performance.now();
     const animateLines = (now) => {
       runtime.connectionList.forEach(fn => fn());
-      if (now - startTime < 350) { // Match the 0.3s CSS transition
+      if (now - startTime < 350) {
         requestAnimationFrame(animateLines);
       }
     };
