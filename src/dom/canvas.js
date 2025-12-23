@@ -1,7 +1,7 @@
 import { runtime } from "../runtime.js";
 import { applyTransform } from "../visualize/visualize.js";
-// import logoUrl from '../logo.png';
-const logoUrl = new URL("../logo.png", import.meta.url).href;
+import logoUrl from '../logo.png';
+// const logoUrl = new URL("../logo.png", import.meta.url).href;
 
 
 export function initCanvas() {
