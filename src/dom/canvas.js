@@ -266,15 +266,8 @@ function setupInteractions() {
     const dx = e.clientX - lastPos.x;
     const dy = e.clientY - lastPos.y;
 
-    let newX = runtime.state.x + dx;
-    let newY = runtime.state.y + dy;
-
-    const padding = 1500;
-    const minX = -7000, maxX = 2000;
-    const minY = -7000, maxY = 2000;
-
-    runtime.state.x = Math.max(minX, Math.min(maxX, newX));
-    runtime.state.y = Math.max(minY, Math.min(maxY, newY));
+    runtime.state.x += dx;
+    runtime.state.y += dy;
 
     lastPos = { x: e.clientX, y: e.clientY };
     applyTransform();
@@ -283,12 +276,27 @@ function setupInteractions() {
   runtime.container.onpointerup = () => isDragging = false;
 
   runtime.container.addEventListener("wheel", (e) => {
-    if (e.ctrlKey) {
-      e.preventDefault();
-      const delta = e.deltaY < 0 ? 1.05 : 0.95;
-      runtime.state.scale = Math.min(2, Math.max(0.2, runtime.state.scale * delta));
-      applyTransform();
-    }
+    e.preventDefault();
+
+    // Get cursor position relative to container
+    const rect = runtime.container.getBoundingClientRect();
+    const cursorX = e.clientX - rect.left;
+    const cursorY = e.clientY - rect.top;
+
+    // Calculate world position before zoom
+    const worldX = (cursorX - runtime.state.x) / runtime.state.scale;
+    const worldY = (cursorY - runtime.state.y) / runtime.state.scale;
+
+    // Apply zoom
+    const delta = e.deltaY < 0 ? 1.1 : 0.9;
+    const newScale = Math.min(3, Math.max(0.1, runtime.state.scale * delta));
+
+    // Calculate new pan position to keep cursor at same world position
+    runtime.state.x = cursorX - worldX * newScale;
+    runtime.state.y = cursorY - worldY * newScale;
+    runtime.state.scale = newScale;
+
+    applyTransform();
   }, { passive: false });
 
   // event delegation for collapsible JSON items
