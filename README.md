@@ -1,3 +1,4 @@
+![React JSON Visualizer Preview](./src/logo.png)
 # React JSON Visualizer
 
 React JSON Visualizer is a lightweight JSON visualizer and JSON viewer dev tool that helps developers understand complex JavaScript objects and arrays through an interactive node-based UI.
