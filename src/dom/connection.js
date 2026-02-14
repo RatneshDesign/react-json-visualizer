@@ -8,7 +8,7 @@ export function connect(a, b) {
   const eC = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   [sC, eC].forEach(c => {
     c.setAttribute("r", "5");
-    c.setAttribute("fill", "#94a3b8");
+    c.setAttribute("class", "connector-dot");
     runtime.svg.appendChild(c);
   });
   runtime.svg.appendChild(path);

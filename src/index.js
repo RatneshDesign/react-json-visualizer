@@ -11,5 +11,12 @@ export function renderJSON(data) {
     initialized = true;
   }
 
-  visualize(data);
+  let safeData = data;
+  if (data === null || data === undefined) {
+    safeData = { value: String(data) };
+  } else if (typeof data !== "object") {
+    safeData = { value: data };
+  }
+
+  visualize(safeData);
 }

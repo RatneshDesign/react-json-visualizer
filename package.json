@@ -3,6 +3,8 @@
   "version": "1.0.8",
   "description": "Visual JSON data flow inspector for developers",
   "main": "src/index.js",
+  "type": "module",
+  "files": ["src"],
   "homepage": "https://github.com/ratneshdesign/json-visualizer#readme",
   "repository": {
     "type": "git",

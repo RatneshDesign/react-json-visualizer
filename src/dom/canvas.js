@@ -1,7 +1,7 @@
 import { runtime } from "../runtime.js";
-import { applyTransform } from "../visualize/visualize.js";
-import logoUrl from '../logo.png';
-// const logoUrl = new URL("../logo.png", import.meta.url).href;
+import { applyTransform, centerView } from "../visualize/visualize.js";
+import { escapeHTML } from "../utils/escapeHTML.js";
+const logoUrl = "data:image/png;base64,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";
 
 
 export function initCanvas() {
@@ -11,7 +11,7 @@ export function initCanvas() {
   const toggleBtn = document.createElement("button");
 
   toggleBtn.className = "canvas-toggle-btn";
-  toggleBtn.innerHTML = `<img src="${logoUrl}" alt="Logo" style="object-fit: contain;">`;
+  toggleBtn.innerHTML = `<img src="${logoUrl}" alt="Logo">`;
 
   toggleBtn.onclick = () => toggleCanvas(toggleBtn, sidebarToggleBtn);
   document.body.appendChild(toggleBtn);
@@ -29,6 +29,21 @@ export function initCanvas() {
   sidebarToggleBtn.title = "Toggle Sidebar";
   sidebarToggleBtn.onclick = () => toggleSidebarVisibility(sidebarToggleBtn);
   document.body.appendChild(sidebarToggleBtn);
+
+  // Reset View Button
+  const resetViewBtn = document.createElement("button");
+  resetViewBtn.className = "reset-view-btn";
+  resetViewBtn.style.display = "none";
+  resetViewBtn.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  `;
+  resetViewBtn.title = "Reset View (Fit to Screen)";
+  resetViewBtn.onclick = () => centerView();
+  document.body.appendChild(resetViewBtn);
+  runtime.resetViewBtn = resetViewBtn;
 
   // Create Sidebar
   const sidebar = document.createElement("div");
@@ -143,6 +158,7 @@ function toggleCanvas(btn, sidebarBtn) {
       runtime.container.style.display = "none";
       runtime.sidebar.style.display = "none";
       sidebarBtn.style.display = "none";
+      runtime.resetViewBtn.style.display = "none";
 
       // Resetting opacities for the next "Open" trigger
       runtime.container.style.opacity = "1";
@@ -156,6 +172,7 @@ function toggleCanvas(btn, sidebarBtn) {
     runtime.container.style.display = "block";
     runtime.sidebar.style.display = "flex";
     sidebarBtn.style.display = "flex";
+    runtime.resetViewBtn.style.display = "flex";
     runtime.sidebar.style.opacity = "0";
 
     setTimeout(() => {
@@ -193,22 +210,19 @@ function toggleTheme(btn) {
 }
 
 function updateConnectionColors(theme) {
-  const lines = runtime.svg.querySelectorAll('.connector');
-  const color = theme === 'dark' ? '#64748b' : '#94a3b8';
-  lines.forEach(line => {
-    line.setAttribute('stroke', color);
-  });
+  // CSS variables on .connector and .connector-dot handle theme changes automatically
 }
 
 // Updating sidebar with JSON data
 export function updateSidebarWithData(data) {
   if (!runtime.sidebarContent) return;
 
-  const content = buildJSONTree(data);
+  const seen = new WeakSet();
+  const content = buildJSONTree(data, 0, seen);
   runtime.sidebarContent.innerHTML = content;
 }
 
-function buildJSONTree(obj, level = 0) {
+function buildJSONTree(obj, level = 0, seen) {
   let html = '<div class="json-tree">';
 
   for (const [key, value] of Object.entries(obj)) {
@@ -216,17 +230,28 @@ function buildJSONTree(obj, level = 0) {
     const isArray = Array.isArray(value);
 
     if (isObject) {
+      if (seen.has(value)) {
+        html += `
+          <div class="json-item" style="padding-left: ${level * 4}px">
+            <span class="key">${escapeHTML(key)}:</span>
+            <span class="value" style="color: var(--muted); font-style: italic;">[Circular]</span>
+          </div>
+        `;
+        continue;
+      }
+      seen.add(value);
+
       html += `
         <div class="json-item" style="padding-left: ${level * 4}px">
           <div class="json-key-complex">
             <svg class="expand-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="key">${key}</span>
+            <span class="key">${escapeHTML(key)}</span>
             <span class="type-badge">${isArray ? 'array' : 'object'}</span>
           </div>
           <div class="json-nested">
-            ${buildJSONTree(value, level + 1)}
+            ${buildJSONTree(value, level + 1, seen)}
           </div>
         </div>
       `;
@@ -238,8 +263,8 @@ function buildJSONTree(obj, level = 0) {
 
       html += `
         <div class="json-item" style="padding-left: ${level * 4}px">
-          <span class="key">${key}:</span>
-          <span class="value ${valueType}">${displayValue}</span>
+          <span class="key">${escapeHTML(key)}:</span>
+          <span class="value ${valueType}">${escapeHTML(displayValue)}</span>
         </div>
       `;
     }
@@ -309,9 +334,3 @@ function setupInteractions() {
   });
 }
 
-export function updateDOMTransform() {
-  const ws = runtime.workspace;
-  const s = runtime.state;
-  ws.style.transform = `translate(${s.x}px, ${s.y}px) scale(${s.scale})`;
-  runtime.connectionList.forEach(fn => fn());
-}

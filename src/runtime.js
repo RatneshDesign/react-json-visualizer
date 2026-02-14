@@ -6,6 +6,7 @@ export const runtime = {
   sidebar: null,
   sidebarContent: null,
   sidebarToggleBtn: null,
+  resetViewBtn: null,
   state: {
     x: 0,
     y: 0,
